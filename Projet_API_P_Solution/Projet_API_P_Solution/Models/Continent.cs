@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace Projet_API_P_Solution.Models
 {
-    public class Pays
+    public class Continent
     {
-       
-            public int id { get; set; }
-            public String nomPays { get; set; }
-            
-        
+        public int id { get; set; }
+        public string nom { get; set; }
+
+        public List<Pays> LesPays { get; set; } 
+
     }
 }
