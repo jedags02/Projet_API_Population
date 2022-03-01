@@ -11,6 +11,7 @@ namespace Projet_API_P_Solution.Models
             public int id { get; set; }
             public String nomPays { get; set; }
             
+             
         
     }
 }
