@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Projet_API_P_Solution.Data;
 
 namespace Projet_API_P_Solution
 {
@@ -25,6 +27,9 @@ namespace Projet_API_P_Solution
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<Projet_API_P_SolutionContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("Projet_API_P_SolutionContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
