@@ -9,7 +9,7 @@ namespace Projet_API_P_Solution.Models
     {
         public int id { get; set; }
         public ulong nbrPopulation { get; set; }
-        public string pays { get; set; }
+        public Pays  pays { get; set; }
         public int annee { get; set; }
     }
 }
