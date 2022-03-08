@@ -15,5 +15,7 @@ namespace Projet_API_P_Solution.Data
         }
 
         public DbSet<Projet_API_P_Solution.Models.Population> Population { get; set; }
+
+        public DbSet<Projet_API_P_Solution.Models.Continent> Continent { get; set; }
     }
 }
