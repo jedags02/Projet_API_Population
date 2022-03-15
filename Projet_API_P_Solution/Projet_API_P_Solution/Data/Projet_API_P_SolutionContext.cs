@@ -18,5 +18,6 @@ namespace Projet_API_P_Solution.Data
 
         public DbSet<Projet_API_P_Solution.Models.Pays> Pays { get; set; }
         public object Continent { get; internal set; }
+        public DbSet<Projet_API_P_Solution.Models.Continent> Continent_1 { get; set; }
     }
 }

@@ -12,48 +12,48 @@ namespace Projet_API_P_Solution.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PaysController : ControllerBase
+    public class ContinentsController : ControllerBase
     {
         private readonly Projet_API_P_SolutionContext _context;
 
-        public PaysController(Projet_API_P_SolutionContext context)
+        public ContinentsController(Projet_API_P_SolutionContext context)
         {
             _context = context;
         }
 
-        // GET: api/Pays
+        // GET: api/Continents
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pays>>> GetPays()
+        public async Task<ActionResult<IEnumerable<Continent>>> GetContinent_1()
         {
-            return await _context.Pays.Include("Populations").ToListAsync();
+            return await _context.Continent_1.Include("Pays").ToListAsync();
         }
 
-        // GET: api/Pays/5
+        // GET: api/Continents/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pays>> GetPays(int id)
+        public async Task<ActionResult<Continent>> GetContinent(int id)
         {
-            var pays = await _context.Pays.FindAsync(id);
+            var continent = await _context.Continent_1.FindAsync(id);
 
-            if (pays == null)
+            if (continent == null)
             {
                 return NotFound();
             }
 
-            return pays;
+            return continent;
         }
 
-        // PUT: api/Pays/5
+        // PUT: api/Continents/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPays(int id, Pays pays)
+        public async Task<IActionResult> PutContinent(int id, Continent continent)
         {
-            if (id != pays.Id)
+            if (id != continent.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(pays).State = EntityState.Modified;
+            _context.Entry(continent).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace Projet_API_P_Solution.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PaysExists(id))
+                if (!ContinentExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace Projet_API_P_Solution.Controllers
             return NoContent();
         }
 
-        // POST: api/Pays
+        // POST: api/Continents
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Pays>> PostPays(Pays pays)
+        public async Task<ActionResult<Continent>> PostContinent(Continent continent)
         {
-            _context.Pays.Add(pays);
+            _context.Continent_1.Add(continent);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPays", new { id = pays.Id }, pays);
+            return CreatedAtAction("GetContinent", new { id = continent.Id }, continent);
         }
 
-        // DELETE: api/Pays/5
+        // DELETE: api/Continents/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Pays>> DeletePays(int id)
+        public async Task<ActionResult<Continent>> DeleteContinent(int id)
         {
-            var pays = await _context.Pays.FindAsync(id);
-            if (pays == null)
+            var continent = await _context.Continent_1.FindAsync(id);
+            if (continent == null)
             {
                 return NotFound();
             }
 
-            _context.Pays.Remove(pays);
+            _context.Continent_1.Remove(continent);
             await _context.SaveChangesAsync();
 
-            return pays;
+            return continent;
         }
 
-        private bool PaysExists(int id)
+        private bool ContinentExists(int id)
         {
-            return _context.Pays.Any(e => e.Id == id);
+            return _context.Continent_1.Any(e => e.Id == id);
         }
     }
 }

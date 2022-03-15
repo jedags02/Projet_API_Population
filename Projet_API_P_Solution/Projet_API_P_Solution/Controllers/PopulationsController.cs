@@ -48,7 +48,7 @@ namespace Projet_API_P_Solution.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPopulation(int id, Population population)
         {
-            if (id != population.id)
+            if (id != population.Id)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace Projet_API_P_Solution.Controllers
             _context.Population.Add(population);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPopulation", new { id = population.id }, population);
+            return CreatedAtAction("GetPopulation", new { id = population.Id }, population);
         }
 
         // DELETE: api/Populations/5
@@ -104,7 +104,7 @@ namespace Projet_API_P_Solution.Controllers
 
         private bool PopulationExists(int id)
         {
-            return _context.Population.Any(e => e.id == id);
+            return _context.Population.Any(e => e.Id == id);
         }
     }
 }

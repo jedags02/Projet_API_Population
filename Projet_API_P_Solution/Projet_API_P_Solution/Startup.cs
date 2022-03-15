@@ -52,7 +52,7 @@ namespace Projet_API_P_Solution
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<Projet_API_P_SolutionContext>();
-                context.Database.EnsureDeleted();
+                //context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
             }
         }
