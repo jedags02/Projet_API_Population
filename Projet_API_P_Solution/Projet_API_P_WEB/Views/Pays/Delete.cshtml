@@ -1,0 +1,31 @@
+﻿@model Projet_API_P_Solution.Models.Pays
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Etes vous sûre de vouloir effectuer la suppression?</h3>
+<div>
+    <h4>Pays</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.nomPays)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.nomPays)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Retour à la List</a>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
