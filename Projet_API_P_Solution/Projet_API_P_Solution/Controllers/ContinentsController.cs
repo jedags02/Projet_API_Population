@@ -41,7 +41,30 @@ namespace Projet_API_P_Solution.Controllers
 
             return continent;
         }
+        // Get nombre de population par continent
+        [HttpGet("{continent}/{year}")]
+        public async Task<ActionResult<ulong>> GetPopContinent(Continent continent, int year)
+        {
+            ulong sum_pop = 0;
+            
 
+            if (continent == null)
+            {
+                return NotFound();
+            }
+             foreach (Pays pa in continent.Pays )
+            {
+                foreach (Population po in pa.Populations)
+                {
+                    if (po.annee == year)
+                    {
+                        sum_pop = sum_pop + po.nbrPopulation;
+                    }
+                }
+            }
+
+            return sum_pop;
+        }
         // PUT: api/Continents/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

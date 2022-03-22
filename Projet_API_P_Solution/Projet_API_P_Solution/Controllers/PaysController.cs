@@ -41,6 +41,31 @@ namespace Projet_API_P_Solution.Controllers
 
             return pays;
         }
+        // Get nombre de population d'un pays pour une année donnée
+        public async Task<ActionResult<ulong>> GetPopPaysAnnée(Pays pays, int year)
+        {
+
+
+            if (pays == null )
+            {
+                return NotFound();
+            }
+            else
+            {
+                foreach (Population po in pays.Populations)
+                {
+                    if (po.annee == year)
+                    {
+                        return po.nbrPopulation;
+                    }
+                    else return NotFound();
+                
+                }
+            }
+
+            return NotFound();
+           
+        }
 
         // PUT: api/Pays/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
