@@ -42,29 +42,28 @@ namespace Projet_API_P_Solution.Controllers
             return pays;
         }
         // Get nombre de population d'un pays pour une année donnée
-        public async Task<ActionResult<ulong>> GetPopPaysAnnée(Pays pays, int year)
+        [HttpGet("{pays}/{year}")]
+        public async Task<ActionResult<ulong>> GetPopPaysAnnée(string pays, int year)
         {
-
-
-            if (pays == null )
+            Pays py = null;
+            foreach (Pays pa in await _context.Pays.Include(o => o.Populations).ToListAsync())
             {
-                return NotFound();
-            }
-            else
-            {
-                foreach (Population po in pays.Populations)
+                if (pa.nomPays == pays)
                 {
-                    if (po.annee == year)
-                    {
-                        return po.nbrPopulation;
-                    }
-                    else return NotFound();
-                
+                    py = pa;
                 }
+                
             }
+            foreach (Population po in py.Populations)
+            {
+                if (po.annee == year)
+                {
+                    return po.nbrPopulation;
+                }
+                
 
-            return NotFound();
-           
+            }
+            return BadRequest("Not Found");
         }
 
         // PUT: api/Pays/5
