@@ -42,28 +42,39 @@ namespace Projet_API_P_Solution.Controllers
             return continent;
         }
         // Get nombre de population par continent
-        [HttpGet("{continent}/{year}")]
-        public async Task<ActionResult<ulong>> GetPopContinent(Continent continent, int year)
+        [HttpGet("{cont}/{year}")]
+        public async Task<ActionResult<ulong>> GetPopContinent(string cont, int year)
         {
             ulong sum_pop = 0;
-            
+            Continent continent = null;
 
-            if (continent == null)
+            if (cont == null)
             {
                 return NotFound();
             }
-             foreach (Pays pa in continent.Pays )
+            foreach (Continent conti in await _context.Continent_1.Include(p => p.Pays).ThenInclude(s=>s.Populations).ToListAsync())
+            {
+                if (conti.nomContinent == cont)
+                {
+                     continent = conti;
+                }
+            }
+            foreach ( Pays pa in continent.Pays)
             {
                 foreach (Population po in pa.Populations)
                 {
                     if (po.annee == year)
                     {
+
                         sum_pop = sum_pop + po.nbrPopulation;
+
                     }
                 }
             }
-
             return sum_pop;
+
+            
+            
         }
         // PUT: api/Continents/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
